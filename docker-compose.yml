@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+
+  nginx:
+    build: .
+    ports:
+      - "8080:80"
+    environment:
+      DATABASE_URI: postgres://app_user:password@db:5432/app_db
+      PGRST_DB_SCHEMA: public
+      PGRST_DB_ANON_ROLE: app_user
+      PORT: 80
+      AUTH_USER: admin
+      AUTH_PASS: password
+      # PGRST_OPENAPI_SERVER_PROXY_URI: http://127.0.0.1:3000
+    depends_on:
+      - db
+
+  db:
+    image: postgres:13
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: app_db
+      POSTGRES_USER: app_user
+      POSTGRES_PASSWORD: password

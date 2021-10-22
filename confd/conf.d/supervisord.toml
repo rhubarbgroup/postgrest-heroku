@@ -1,0 +1,5 @@
+[template]
+src = "supervisord.tmpl"
+dest = "/etc/supervisor/conf.d/supervisord.conf"
+owner = "root"
+mode = "0644"
